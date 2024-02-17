@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html, body #root{
+    min-height: 100%;
+    padding:0px; margin:0px;
+    font-family: Roboto;
+}
+
+
+.container{
+    width: 100%;
+}
+
+.user-info_container {
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user-info_title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 8px;
+    color: red;
+}
+
+.dhx_sidebar--minimized .user-info_title {
+    visibility: hidden;
+}
+
+
+.custom-sidebar {
+    width: 25%;
+}
+
+
+.Mui-disabled {
+    visibility: hidden;
+}
+
+
+.dhx_ribbon-content{
+    justify-content: space-around;
+}
+
+.dhx_grid-row:hover {
+    background-color: var(--dhx-color-primary-light-hover);
+}
+
+
+.custom-icon-tree {
+    color: #000;
+}
