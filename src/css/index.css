@@ -45,7 +45,7 @@ html, body #root{
 
 
 .dhx_ribbon-content{
-    justify-content: space-around;
+    justify-content: start;
 }
 
 .dhx_grid-row:hover {
@@ -55,4 +55,9 @@ html, body #root{
 
 .custom-icon-tree {
     color: #000;
+}
+
+
+.custom {
+    flex: 1 1 auto
 }

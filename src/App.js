@@ -1,21 +1,21 @@
 import React from "react";
-import {
-  Layout as LayoutDHX,
-  Sidebar as SidebarDHX,
-  Tabbar as TabbarDHX,
-  Ribbon as RibbonDHX,
-  Grid as GridDHX,
-  Chart as ChartDHX,
-  Toolbar as ToolBarDHX,
-  Form as FormDHX,
-  Tree as TreeDHX
-} from "dhx-suite";
+// import {
+//   Layout as LayoutDHX,
+//   Sidebar as SidebarDHX,
+//   Tabbar as TabbarDHX,
+//   Ribbon as RibbonDHX,
+//   Grid as GridDHX,
+//   Chart as ChartDHX,
+//   Toolbar as ToolBarDHX,
+//   Form as FormDHX,
+//   Tree as TreeDHX,
+// } from "dhx-suite";
 import layouts from "./data/layout"
 import grid_reference_organization from "./data/grid";
 import axios from "axios";
 import base_url from "./url";
 import classif_data from "./data/grid_classif_data";
-
+import * as dhx from "dhx-suite-package"
 
 class App extends React.Component {
 
@@ -44,11 +44,11 @@ class App extends React.Component {
 
   componentDidMount() {
 
-    this.layout = new LayoutDHX(this.el, {
+    this.layout = new dhx.Layout(this.el, {
       cols: layouts.layout
     })
 
-    this.sidebar = new SidebarDHX(null, {
+    this.sidebar = new dhx.Sidebar(null, {
       css: "dhx_widget--border_right",
       width: 250,
       data: [
@@ -57,17 +57,17 @@ class App extends React.Component {
           css: "toggle-button",
           icon: "mdi mdi-backburger",
         },
-        {
-          type: "customHTML",
-          id: "userInfo",
-          css: "user-info_item",
-          html: `<div class='user-info_container'>
-                        <div class='user-info_title'>
-                            Макет АС
-                        </div>
-                   </div>`
+        // {
+        //   type: "customHTML",
+        //   id: "userInfo",
+        //   css: "user-info_item",
+        //   html: `<div class='user-info_container'>
+        //                 <div class='user-info_title'>
+        //                     Макет АС
+        //                 </div>
+        //            </div>`
 
-        },
+        // },
         {
           "id": "lk",
           "value": "Личные данные",
@@ -338,7 +338,7 @@ class App extends React.Component {
       }
     });
 
-    this.tabbar = new TabbarDHX(null, {
+    this.tabbar = new dhx.Tabbar(null, {
       mode: "top",
       css: "dhx_widget--bordered dhx_widget--bg_white",
       width: "100%",
@@ -407,11 +407,11 @@ class App extends React.Component {
   }
 
   constructorClassification() {
-    const layoutReferenceOrganization = new LayoutDHX(null, {
+    const layoutReferenceOrganization = new dhx.Layout(null, {
       rows: layouts.vertical_layout
     });
 
-    const toolbarClassification = new ToolBarDHX(null, {
+    const toolbarClassification = new dhx.Toolbar(null, {
       css: "dhx_widget--bordered",
       data: [
         {
@@ -433,7 +433,7 @@ class App extends React.Component {
     })
 
 
-    const gridClassification = new GridDHX(null, {
+    const gridClassification = new dhx.Grid(null, {
       columns: [
         { minWidth: 300, id: "name", header: [{ text: "Наименование классификатора" }, { content: "inputFilter" }] },
         { minWidth: 200, id: "count", header: [{ text: "Всего записей" }] },
@@ -477,8 +477,8 @@ class App extends React.Component {
     }
     this.tabbar.setActive(`classif_${id}`);
 
-    const layout = new LayoutDHX(null, {
-      cols: [
+    const layout = new dhx.Layout(null, {
+      rows: [
         {
           id: "main",
           header: data.name
@@ -486,48 +486,8 @@ class App extends React.Component {
       ]
     })
 
-    const toolbarDetail = new ToolBarDHX(null, {
 
-      css: "dhx_widget--bordered",
-      data: [
-        {
-          "id": "add",
-          "icon": "mdi mdi-plus",
-          "value": "Добавить"
-        },
-        {
-          "id": "edit",
-          "icon": "mdi mdi-pencil",
-          "value": "Изменить"
-        },
-        {
-          "id": "remove",
-          "icon": "mdi mdi-close-circle",
-          "value": "Удалить"
-        },
-      ]
-    })
-
-
-    const toolbarContent = new ToolBarDHX(null, {
-
-      css: "dhx_widget--bordered",
-      data: [
-        {
-          "id": "add",
-          "icon": "mdi mdi-plus",
-          "value": "Добавить"
-        },
-        {
-          "id": "remove",
-          "icon": "mdi mdi-close-circle",
-          "value": "Удалить"
-        },
-      ]
-    })
-
-
-    const tabbarClassifDetail = new TabbarDHX(null, {
+    const tabbarClassifDetail = new dhx.Tabbar(null, {
       mode: "top",
       css: "dhx_widget--bordered dhx_widget--bg_white",
       width: "100%",
@@ -538,14 +498,37 @@ class App extends React.Component {
       ]
     })
 
-    const layoutDetail = new LayoutDHX(null, {
-      rows: layouts.vertical_layout
-    })
 
-    layoutDetail.getCell("ribbon").attach(toolbarDetail)
+    // const layoutDetail = new dhx.Layout(null, {
+    //   rows: layouts.vertical_layout,
+      
+    // })
 
-    const form = new FormDHX(null, {
-      css: "dhx_widget--bordered",
+    // const toolbarDetail = new dhx.Toolbar(null, {
+    //   css: "dhx_widget--bordered",
+    //   data: [
+    //     {
+    //       "id": "add",
+    //       "icon": "mdi mdi-plus",
+    //       "value": "Добавить"
+    //     },
+    //     {
+    //       "id": "edit",
+    //       "icon": "mdi mdi-pencil",
+    //       "value": "Изменить"
+    //     },
+    //     {
+    //       "id": "remove",
+    //       "icon": "mdi mdi-close-circle",
+    //       "value": "Удалить"
+    //     },
+    //   ]
+    // })
+
+    // layoutDetail.getCell("ribbon").attach(toolbarDetail)
+
+    const form = new dhx.Form(null, {
+      css: "dhx_widget--bordered custom",
       rows: [
         {
           type: "input",
@@ -570,23 +553,47 @@ class App extends React.Component {
       ],
     });
 
-    layoutDetail.getCell("main").attach(form)
+    // layoutDetail.getCell("main").attach(form)
 
 
-    tabbarClassifDetail.getCell("detail").attach(layoutDetail)
+    tabbarClassifDetail.getCell("detail").attach(form)
 
-    const layoutContent = new LayoutDHX(null, {
+    const layoutContent = new dhx.Layout(null, {
       rows: layouts.vertical_layout
     })
 
-    const treeClasif = new TreeDHX(null, {
+
+    const toolbarContent = new dhx.Toolbar(null, {
+
+      css: "dhx_widget--bordered",
+      data: [
+        {
+          "id": "add",
+          "icon": "mdi mdi-plus",
+          "value": "Добавить"
+        },
+        {
+          "id": "remove",
+          "icon": "mdi mdi-close-circle",
+          "value": "Удалить"
+        },
+      ]
+    })
+
+    const treeClasif = new dhx.TreeGrid(null, {
       css: "dhx_widget--bg_white custom-icon-tree",
-      icon: {
-        folder: "mdi mdi-folder",
-        openFolder: "mdi mdi-folder-open",
-        file: "mdi mdi-file-outline"
-      },
-      data: data.content
+      width: "100vh",
+      columns: [
+        { id: "kod", header: [{ text: "#" }] },
+        { id: "name", header: [{ text: "Наименование" }] },
+      ],
+      data: data.data,
+      width: "100%",
+      adjust: true,
+      autoWidth: true,
+      autoHeight: true,
+      headerAutoHeight: true,
+      collapsed:true
     })
 
     layoutContent.getCell("ribbon").attach(toolbarContent)
@@ -604,22 +611,19 @@ class App extends React.Component {
 
   }
 
-  constructorReferenceOrganization() {
-    const layoutReferenceOrganization = new LayoutDHX(null, {
+  async constructorReferenceOrganization() {
+    const layoutReferenceOrganization = new dhx.Layout(null, {
       rows: [
         {
-            id: "ribbon",
+          id: "ribbon",
         },
         {
-            id: "main",
-        },
-        {
-          id: "pagination",
-      },
-    ]
+          id: "main",
+        }
+      ]
     });
 
-    const ribbonReferenceOrganization = new RibbonDHX(null, {
+    const ribbonReferenceOrganization = new dhx.Ribbon(null, {
       css: "dhx_widget--bordered dhx_widget--bg_white",
       data: [
         {
@@ -668,12 +672,6 @@ class App extends React.Component {
           "id": "views",
           "title": "Режимы просмотра",
           "items": [
-            {
-              "id": "refresh",
-              "value": "Сбросить",
-              "icon": "mdi mdi-refresh",
-              "size": "auto"
-            },
             {
               "type": "block",
               "direction": "col",
@@ -761,7 +759,7 @@ class App extends React.Component {
     layoutReferenceOrganization.getCell("ribbon").attach(ribbonReferenceOrganization);
 
 
-    const tabbarReferenceOrganization = new TabbarDHX(null, {
+    const tabbarReferenceOrganization = new dhx.Tabbar(null, {
       mode: "top",
       css: "dhx_widget--bordered dhx_widget--bg_white",
     })
@@ -770,7 +768,7 @@ class App extends React.Component {
     tabbarReferenceOrganization.addTab({ tab: "Статистика", id: "statistic" }, 1);
 
 
-    const chart = new ChartDHX(null, {
+    const chart = new dhx.Chart(null, {
       type: "bar",
       css: "dhx_widget--bordered",
       scales: {
@@ -806,7 +804,7 @@ class App extends React.Component {
       }
     })
 
-    const gridReferenceOrganization = new GridDHX(null, {
+    const gridReferenceOrganization = new dhx.Grid(null, {
       columns: grid_reference_organization,
       adjust: true,
       autoWidth: true,
@@ -817,31 +815,88 @@ class App extends React.Component {
       tooltip: false,
     });
 
-    axios.get(base_url + "api/legal_entities/", {
+
+    const res = await axios.get(base_url + "api/legal_entities/", {
       params: {
-        limit: 100,
+        limit: 50,
         offset: 0
       }
-    }).then(res => {
-      gridReferenceOrganization.data.parse(res.data.data);
+    })
 
-      function getCountDate(field, year) {
-        return res.data.data.filter((obj) => (new Date(Date.parse(obj[field]))).getFullYear() === year).length
+    gridReferenceOrganization.data.parse(res.data.data);
+
+
+    let data = res.data.data
+
+    const pagination = new dhx.Pagination(null, {
+      css: "dhx_widget--bordered dhx_widget--no-border_top",
+      data: gridReferenceOrganization.data,
+      pageSize: 50
+    })
+
+
+
+    async function getData(data, count) {
+      function delay(time) {
+        return new Promise(resolve => setTimeout(resolve, time));
       }
 
-      chart.data.parse([
-        { month: "2015", "include_at": getCountDate("include_at", 2015), "registration_at": getCountDate("registration_at", 2015) },
-        { month: "2016", "include_at": getCountDate("include_at", 2016), "registration_at": getCountDate("registration_at", 2016) },
-        { month: "2017", "include_at": getCountDate("include_at", 2017), "registration_at": getCountDate("registration_at", 2017) },
-        { month: "2018", "include_at": getCountDate("include_at", 2018), "registration_at": getCountDate("registration_at", 2018) },
-        { month: "2019", "include_at": getCountDate("include_at", 2019), "registration_at": getCountDate("registration_at", 2019) },
-        { month: "2020", "include_at": getCountDate("include_at", 2020), "registration_at": getCountDate("registration_at", 2020) },
-      ])
+      let current = 50
+      while (current < count - 50) {
+        try {
+          const res = await axios.get(base_url + "api/legal_entities/", {
+            params: {
+              limit: 50,
+              offset: current
+            }
+          })
+          data = [...data, ...res.data.data]
+          gridReferenceOrganization.data.parse(data)
+          pagination.data.parse(data)
+          current += 50
+          await delay(300);
+        } catch {
+          console.log('====================================');
+          console.log("error");
+          console.log('====================================');
+        }
 
+      }
 
-      // chart.config.scales.left.max = Math.max(...chart.data.map(o => o.organization))
+    }
 
+    getData(data, res.data.count);
+
+    const layoutGrid = new dhx.Layout(null, {
+      rows: [
+        {
+          id: "grid"
+        },
+        {
+          id: "pagination"
+        }
+      ]
     })
+
+    layoutGrid.getCell("grid").attach(gridReferenceOrganization);
+    layoutGrid.getCell("pagination").attach(pagination);
+
+
+    function getCountDate(field, year) {
+      return res.data.data.filter((obj) => (new Date(Date.parse(obj[field]))).getFullYear() === year).length
+    }
+
+    chart.data.parse([
+      { month: "2015", "include_at": getCountDate("include_at", 2015), "registration_at": getCountDate("registration_at", 2015) },
+      { month: "2016", "include_at": getCountDate("include_at", 2016), "registration_at": getCountDate("registration_at", 2016) },
+      { month: "2017", "include_at": getCountDate("include_at", 2017), "registration_at": getCountDate("registration_at", 2017) },
+      { month: "2018", "include_at": getCountDate("include_at", 2018), "registration_at": getCountDate("registration_at", 2018) },
+      { month: "2019", "include_at": getCountDate("include_at", 2019), "registration_at": getCountDate("registration_at", 2019) },
+      { month: "2020", "include_at": getCountDate("include_at", 2020), "registration_at": getCountDate("registration_at", 2020) },
+    ])
+
+
+    // chart.config.scales.left.max = Math.max(...chart.data.map(o => o.organization))
 
 
 
@@ -894,7 +949,8 @@ class App extends React.Component {
 
 
 
-    tabbarReferenceOrganization.getCell("grid").attach(gridReferenceOrganization);
+
+    tabbarReferenceOrganization.getCell("grid").attach(layoutGrid);
     tabbarReferenceOrganization.getCell("statistic").attach(chart);
 
     layoutReferenceOrganization.getCell("main").attach(tabbarReferenceOrganization);
